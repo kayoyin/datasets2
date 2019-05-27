@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 #include "common.h"
 
-void printboard(char* board);
+void printboard(char* board, int npos);
 
 
 
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
           char player = buffer[5];
         }
         else if (msgtype == FYI){
-          printboard(game);
+          printboard(game, npos);
         }
         else if (msgtype == MYM){
 
@@ -107,12 +107,11 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void printboard(Game* game){
-  Position** grid = game->grid;
-  printf("%d filled positions. \n", game->npos);
-  printf("%c | %c | %c \n", grid[0]->player, grid[1]->player, grid[2]->player);
+void printboard(char* board, int npos){
+  printf("%d filled positions. \n", npos);
+  printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
   printf("-+-+- \n");
-  printf("%c | %c | %c \n", grid[3]->player, grid[4]->player, grid[5]->player);
+  printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
   printf("-+-+- \n");
-  printf("%c | %c | %c \n", grid[6]->player, grid[7]->player, grid[8]->player);
+  printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
 }
