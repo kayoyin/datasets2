@@ -8,7 +8,8 @@
 #include <sys/socket.h>
 #include "common.h"
 
-void printboard(Game* game);
+void printboard(char* board);
+
 
 
 int main(int argc, char** argv) {
@@ -42,8 +43,10 @@ int main(int argc, char** argv) {
     // Loop
     char buffer[1024];
     char msgtype;
-    Game* game = NULL;
     int col, row;
+    char player;
+    int npos = 0;
+    char* board[3][3] = {{' '}};
     while (! terminate) {
         // Receive message from server
         socklen_t len = sizeof(dest);
@@ -59,6 +62,7 @@ int main(int argc, char** argv) {
         show_bytes(buffer, sizeof(buffer));
         if (msgtype == TXT){
           printf("TXT message : %s\n", buffer);
+          char player = buffer[5];
         }
         else if (msgtype == FYI){
           printboard(game);
@@ -72,14 +76,16 @@ int main(int argc, char** argv) {
               printf("Please choose a valid board position \n");
               continue;
             }
-            /*
+
             else if (!isspace(board[col][row])){
               printf("Please choose a free board position \n");
               continue;
             }
-            */
+
             int* bslen = NULL;
             msg = build_mov(col, row, bslen);
+            npos ++;
+
             break;
           }
           /*
@@ -95,7 +101,6 @@ int main(int argc, char** argv) {
           printf("end TBD");
           terminate = 1;
         }
-
     }
     // Terminate
     close(sockfd);
