@@ -46,7 +46,9 @@ int main(int argc, char** argv) {
     int col, row;
     char player;
     int npos = 0;
-    char* board[3][3] = {{' '}};
+    char board[3][3] = {{' ',' ',' '}, {' ',' ',' '}, {' ',' ',' '}};
+
+
     while (! terminate) {
         // Receive message from server
         socklen_t len = sizeof(dest);
@@ -65,7 +67,7 @@ int main(int argc, char** argv) {
           char player = buffer[5];
         }
         else if (msgtype == FYI){
-          printboard(game, npos);
+          printboard(board, npos);
         }
         else if (msgtype == MYM){
 
@@ -109,9 +111,12 @@ int main(int argc, char** argv) {
 
 void printboard(char* board, int npos){
   printf("%d filled positions. \n", npos);
+  printf(board);
+  /*
   printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
   printf("-+-+- \n");
   printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
   printf("-+-+- \n");
   printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
+  */
 }
