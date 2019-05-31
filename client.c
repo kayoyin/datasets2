@@ -39,7 +39,6 @@ int main(int argc, char** argv) {
     // Loop
     char buffer[1024];
     char msgtype;
-    int row, col;
 
     while (! terminate) {
         // Receive message from server
@@ -83,16 +82,16 @@ int main(int argc, char** argv) {
         else if (msgtype == MYM){
 
           while (1){
-            printf("Please choose your next move (choose a position on the board) \n");
-            scanf("%d, %d", &col, &row);
+            printf("Please choose your next move (choose a position (col, row) on the board) \n");
+            int col, row;
+            scanf("%d, %d", col, row);
             if (col < 0 || col > 2 || row < 0 || row > 2){
               printf("Please choose a valid board position \n");
-              continue;
+            }else {
+              int* bslen = NULL;
+              msg = build_mov(col, row, bslen);
+              break;
             }
-
-            int* bslen = NULL;
-            msg = build_mov(col, row, bslen);
-            break;
           }
           /*
           sendto(sockfd, (const char *)msg, strlen(msg),
