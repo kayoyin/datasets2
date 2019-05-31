@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
               player = 'O';
             } */
             (buffer[i] == 1) ? (player = 'X') : (player = 'O');
-            board[buffer[i+2]][buffer[i+1]] = player;
+            board[(int)buffer[i+2]][(int)buffer[i+1]] = player;
           }
           printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
           printf("--+---+-- \n");
@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
               msg = build_mov(col, row, bslen);
               break;
             }*/
-            printf("You chose: (%d, %d)", row, col);
+            printf("You chose: (%d, %d) \n", row, col);
             int bslen = 0;
             msg = build_mov(col, row, &bslen);
             break;
