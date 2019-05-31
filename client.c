@@ -96,6 +96,7 @@ int main(int argc, char** argv) {
             printf("You chose: (%d, %d) \n", row, col);
             int bslen = 0;
             msg = build_mov(col, row, &bslen);
+            printf("%s\n",msg);
             break;
           }
           /*

@@ -68,7 +68,6 @@ char* build_mov(char col, char row, int* bslen) {
 	*ite = col;
 	ite++;
 	*ite = row;
-	printf("%s\n",payload);
 
 	return payload;
 }
