@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
               msg = build_mov(col, row, bslen);
               break;
             }*/
-            int* bslen = NULL;
+            int* bslen = 0;
             msg = build_mov(col, row, bslen);
             break;
           }
