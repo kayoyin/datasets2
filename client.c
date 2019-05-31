@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
           while (1){
             printf("Please choose your next move (choose a position on the board) \n");
             scanf("%d, %d", &col, &row);
-            if (col < 0 || col > 8 || row < 0 || row > 0){
+            if (col < 0 || col > 2 || row < 0 || row > 2){
               printf("Please choose a valid board position \n");
               continue;
             }
