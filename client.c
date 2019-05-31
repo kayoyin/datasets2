@@ -59,12 +59,26 @@ int main(int argc, char** argv) {
           printf("TXT message : %s\n", buffer);
         }
         else if (msgtype == FYI){
-          printf("%d filled positions. \n", buffer[1]);
-          printf("%c | %c | %c \n", buffer[2], buffer[3], buffer[4]);
+          int npos = buffer[1];
+          printf("%d filled positions. \n", npos);
+          char board[3][3] = {{' ',' ',' '}, {' ',' ',' '}, {' ',' ',' '}};
+          char player;
+          for (int i = 2; i < 3*npos+2; i += 3){
+            /*
+            if (buffer[i] == 1){
+              player = 'X';
+            } else
+            {
+              player = 'O';
+            } */
+            (buffer[i] == 1) ? (player = 'X') : (player = 'O');
+            board[buffer[i+2]][buffer[i+1]] = player;
+          }
+          printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
           printf("-+-+- \n");
-          printf("%c | %c | %c \n", buffer[5], buffer[6], buffer[7]);
+          printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
           printf("-+-+- \n");
-          printf("%c | %c | %c \n", buffer[8], buffer[9], buffer[10]);
+          printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
         }
         else if (msgtype == MYM){
 
