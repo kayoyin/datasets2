@@ -63,7 +63,7 @@ $(LINK_TARGET) : $(OBJS)
 # $lt; for the pattern-matched dependency
 
 %.o : %.c
-	cc -g  -Wall -o $@ -c $<
+	cc -g -std=gnu99 -Wall -o $@ -c $<
 
 # These are Dependency Rules, which are rules without any command.
 # Dependency Rules indicate that if any file to the right of the colon changes,
