@@ -37,13 +37,13 @@ int main(int argc, char** argv) {
     }
 
     // Loop
-    char buffer[1024];
+    char buffer[2048];
     char msgtype;
 
     while (! terminate) {
         // Receive message from server
         socklen_t len = sizeof(dest);
-        int n = recvfrom(sockfd, (char *)buffer, 1024,
+        int n = recvfrom(sockfd, (char *)buffer, 2048,
                 0, (struct sockaddr *) &dest,
                 &len);
 
@@ -74,9 +74,9 @@ int main(int argc, char** argv) {
             board[buffer[i+2]][buffer[i+1]] = player;
           }
           printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
-          printf("--+--+-- \n");
+          printf("--+---+-- \n");
           printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
-          printf("--+--+-- \n");
+          printf("--+---+-- \n");
           printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
         }
         else if (msgtype == MYM){
