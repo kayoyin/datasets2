@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     int terminate = 0;  // run until told otherwise
     // Arguments parsing
     if (argc<3) {
-        printf("Syntax: ./client <ipaddr> <port>\n");
+        printf("Syntax: ./git client <ipaddr> <port>\n");
         exit(1);
     }
     int port = atoi(argv[2]);
