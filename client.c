@@ -8,10 +8,6 @@
 #include <sys/socket.h>
 #include "common.h"
 
-void printboard(char* board, int npos);
-
-
-
 int main(int argc, char** argv) {
     int terminate = 0;  // run until told otherwise
     // Arguments parsing
@@ -43,11 +39,7 @@ int main(int argc, char** argv) {
     // Loop
     char buffer[1024];
     char msgtype;
-    int col, row;
-    char player;
-    int npos = 0;
-    char board[3][3] = {{' ',' ',' '}, {' ',' ',' '}, {' ',' ',' '}};
-
+    int row, col;
 
     while (! terminate) {
         // Receive message from server
@@ -62,12 +54,17 @@ int main(int argc, char** argv) {
         buffer[n] = '\0';
         msgtype = buffer[0];
         show_bytes(buffer, sizeof(buffer));
+
         if (msgtype == TXT){
           printf("TXT message : %s\n", buffer);
-          char player = buffer[5];
         }
         else if (msgtype == FYI){
-          printboard(board, npos);
+          printf("%d filled positions. \n", buffer[1]);
+          printf("%c | %c | %c \n", buffer[2], buffer[3], buffer[4]);
+          printf("-+-+- \n");
+          printf("%c | %c | %c \n", buffer[5], buffer[6], buffer[7]);
+          printf("-+-+- \n");
+          printf("%c | %c | %c \n", buffer[8], buffer[9], buffer[10]);
         }
         else if (msgtype == MYM){
 
@@ -79,15 +76,8 @@ int main(int argc, char** argv) {
               continue;
             }
 
-            else if (!isspace(board[col][row])){
-              printf("Please choose a free board position \n");
-              continue;
-            }
-
             int* bslen = NULL;
             msg = build_mov(col, row, bslen);
-            npos ++;
-
             break;
           }
           /*
@@ -100,23 +90,18 @@ int main(int argc, char** argv) {
         }
         else if (msgtype == END)
         {
-          printf("end TBD");
+          if (buffer[1] == 0)
+          {
+            printf("The game is a tie! \n");
+          }
+          else
+          {
+            printf("Player %d is the winner! \n", buffer[1]);
+          }
           terminate = 1;
         }
     }
     // Terminate
     close(sockfd);
     return 0;
-}
-
-void printboard(char* board, int npos){
-  printf("%d filled positions. \n", npos);
-  printf(board);
-  /*
-  printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
-  printf("-+-+- \n");
-  printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
-  printf("-+-+- \n");
-  printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
-  */
 }
