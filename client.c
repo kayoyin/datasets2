@@ -82,9 +82,9 @@ int main(int argc, char** argv) {
         else if (msgtype == MYM){
 
           while (1){
-            printf("Please choose your next move (choose a position (col, row) on the board) \n");
+            printf("Please choose your next move (choose a position (col row) on the board) \n");
             int col, row;
-            scanf("%d, %d", &col, &row);
+            scanf("%d %d", &col, &row);
             /*
             if (col < 0 || col > 2 || row < 0 || row > 2){
               printf("Please choose a valid board position \n");
@@ -93,8 +93,8 @@ int main(int argc, char** argv) {
               msg = build_mov(col, row, bslen);
               break;
             }*/
-            int* bslen = 0;
-            msg = build_mov(col, row, bslen);
+            int bslen = 0;
+            msg = build_mov(col, row, &bslen);
             break;
           }
           /*
