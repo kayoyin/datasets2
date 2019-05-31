@@ -8,13 +8,14 @@
 
 # Here is a simple Make Macro.
 
-LINK_TARGET = client
+LINK_TARGET = client, myserver
 
 # Here is a Make Macro that uses the backslash to extend to multiple lines.
 # This allows quick modification of more object files.
 
 OBJS = \
 	client.o \
+	server.o \
 	common.o
 # Here is a Make Macro defined by two Macro Expansions.
 # A Macro Expansion may be treated as a textual replacement of the Make Macro.
@@ -73,4 +74,5 @@ $(LINK_TARGET) : $(OBJS)
 # Dependency Rules are often used to capture header file dependencies.
 
 client.o : client.c common.h
+server.o: server.c common.h
 common.o: common.h

@@ -16,10 +16,10 @@ int main(int argc, char** argv) {
     int terminate = 0;  // run until told otherwise
     // Arguments parsing
     if (argc<3) {
-        printf("Syntax: ./git client <ipaddr> <port>\n");
+        printf("Syntax: ./server <port>\n");
         exit(1);
     }
-    int port = atoi(argv[2]);
+    int port = atoi(argv[1]);
     struct sockaddr_in servaddr, cliaddr;
     memset(&servaddr, 0, sizeof(struct sockaddr_in));
     memset(&cliaddr, 0, sizeof(struct sockaddr_in));
@@ -29,10 +29,13 @@ int main(int argc, char** argv) {
     servaddr.sin_port = htons(port);
     // Socket creation
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0); // creation of datagram socket
+    int sockpl[2] = {0,0}; // socket for each player
     if (sockfd < 0) {
       perror("socket creation failed");
       exit(EXIT_FAILURE);
     }
+
+    printf("Socket created.\n");
 
     if ( bind(sockfd, (const struct sockaddr *)&servaddr,
             sizeof(servaddr)) < 0 )
@@ -40,3 +43,23 @@ int main(int argc, char** argv) {
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
+
+    printf("Bind to port %d \n", port);
+    printf("Waiting for connections...\n");
+
+    int nplayers = 0; // number of players
+    while (nplayers < 2){
+      if (listen(sockfd, 2) < 0)
+      {
+          perror("listen");
+          exit(EXIT_FAILURE);
+      }
+      sockpl[nplayers] = accept(sockfd,0,0);
+      nplayers++;
+
+
+
+    }
+
+
+}
