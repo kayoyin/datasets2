@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
 
         buffer[n] = '\0';
         msgtype = buffer[0];
-        show_bytes(buffer, sizeof(buffer));
+        //show_bytes(buffer, sizeof(buffer));
 
         if (msgtype == TXT){
           printf("TXT message : %s\n", buffer);
