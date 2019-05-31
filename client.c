@@ -74,17 +74,17 @@ int main(int argc, char** argv) {
             board[buffer[i+2]][buffer[i+1]] = player;
           }
           printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
-          printf("-+-+- \n");
+          printf("--+--+-- \n");
           printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
-          printf("-+-+- \n");
+          printf("--+--+-- \n");
           printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
         }
         else if (msgtype == MYM){
 
           while (1){
-            printf("Please choose your next move (choose a position (col row) on the board) \n");
+            printf("Please choose your next move (choose a position 'row col' on the board) \n");
             int col, row;
-            scanf("%d %d", &col, &row);
+            scanf("%d %d", &row, &col);
             /*
             if (col < 0 || col > 2 || row < 0 || row > 2){
               printf("Please choose a valid board position \n");
@@ -93,6 +93,7 @@ int main(int argc, char** argv) {
               msg = build_mov(col, row, bslen);
               break;
             }*/
+            printf("You chose: (%d, %d)", row, col);
             int bslen = 0;
             msg = build_mov(col, row, &bslen);
             break;
@@ -102,7 +103,8 @@ int main(int argc, char** argv) {
               0, (const struct sockaddr *) &dest,
                   sizeof(dest))
           */
-          send_msg(MOV, sockfd, strlen(msg), msg, &dest, sizeof(dest));
+          socklen_t destlen = sizeof(dest);
+          send_msg(MOV, sockfd, strlen(msg), msg, &dest, &destlen);
 
         }
         else if (msgtype == END)
