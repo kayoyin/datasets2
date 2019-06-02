@@ -8,7 +8,7 @@
 
 # Here is a simple Make Macro.
 
-LINK_TARGET = client, myserver
+LINK_TARGET = client server
 
 # Here is a Make Macro that uses the backslash to extend to multiple lines.
 # This allows quick modification of more object files.
@@ -54,7 +54,10 @@ clean:
 # $@ expands to the rule's target, in this case "wgetX".
 # $^ expands to the rule's dependencies, in this case the two files
 # url.o and wgetX.o
-$(LINK_TARGET) : $(OBJS)
+client : client.o common.o
+	cc -g -o $@ $^
+
+server: server.o common.o
 	cc -g -o $@ $^
 
 # Here is a Pattern Rule, often used for compile-line.

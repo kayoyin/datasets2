@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     }
 
     // Greetings message
-    char *msg = "Let's play! \n";
+    char *msg = "I want to play! \n";
     if (sendto(sockfd, (const char *)msg, strlen(msg),
         0, (const struct sockaddr *) &dest,
             sizeof(dest)) < 0){
@@ -53,7 +53,6 @@ int main(int argc, char** argv) {
         buffer[n] = '\0';
         msgtype = buffer[0];
         //show_bytes(buffer, sizeof(buffer));
-
         if (msgtype == TXT){
           printf("TXT message : %s\n", buffer);
         }
@@ -71,13 +70,14 @@ int main(int argc, char** argv) {
               player = 'O';
             } */
             (buffer[i] == 1) ? (player = 'X') : (player = 'O');
-            board[(int)buffer[i+2]][(int)buffer[i+1]] = player;
+            board[(int)buffer[i+2]-1][(int)buffer[i+1]-1] = player;
           }
-          printf("%c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
-          printf("--+---+-- \n");
-          printf("%c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
-          printf("--+---+-- \n");
-          printf("%c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
+          printf("  c1  c2  c3 \n");
+          printf("r1 %c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
+          printf("  ---+---+-- \n");
+          printf("r2 %c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
+          printf("  ---+---+-- \n");
+          printf("r3 %c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
         }
         else if (msgtype == MYM){
 

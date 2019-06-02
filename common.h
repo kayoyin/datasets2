@@ -14,10 +14,9 @@ typedef struct Player {
 } Player;
 
 typedef struct Game {
-	int id;
 	int active; 		// 1=yes, 0=no
 	struct Player player[2];	// playing with X and O
-	int turn; 			// 0: waiting for players, 1: waiting for player1 msg, 2: waiting for player2 msg
+	int turn; 			// 0: waiting for player1 msg, 1: waiting for player2 msg
 	int nplayers;
 
 	struct Position* grid[9]; // max nbr of positions is 9
