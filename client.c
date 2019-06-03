@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <ctype.h>
 #include "common.h"
 
 int main(int argc, char** argv) {
@@ -82,9 +83,13 @@ int main(int argc, char** argv) {
         else if (msgtype == MYM){
 
           while (1){
-            printf("Please choose your next move (choose a position 'row col' on the board) \n");
+            printf("Please choose your next move, syntax: row col (e.g. '2 1') \n");
             int col, row;
             scanf("%d %d", &row, &col);
+            /*if (!(isdigit(col) && isdigit(row))){
+              printf("Error: please input two integers 'row col' \n");
+              scanf("%d %d", &row, &col);
+            }*/
             /*
             if (col < 0 || col > 2 || row < 0 || row > 2){
               printf("Please choose a valid board position \n");
