@@ -9,6 +9,8 @@
 #include <ctype.h>
 #include "common.h"
 
+
+// Initial structure obtained from course moodle
 int main(int argc, char** argv) {
     int terminate = 0;  // run until told otherwise
     // Arguments parsing
@@ -89,14 +91,6 @@ int main(int argc, char** argv) {
             /*if (!(isdigit(col) && isdigit(row))){
               printf("Error: please input two integers 'row col' \n");
               scanf("%d %d", &row, &col);
-            }*/
-            /*
-            if (col < 0 || col > 2 || row < 0 || row > 2){
-              printf("Please choose a valid board position \n");
-            }else {
-              int* bslen = NULL;
-              msg = build_mov(col, row, bslen);
-              break;
             }*/
             printf("You chose: (%d, %d) \n", row, col);
             int bslen = 0;
